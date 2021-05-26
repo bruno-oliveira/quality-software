@@ -6,7 +6,57 @@ While all of these are extremely useful in its own right, I feel that sometimes 
 
 This is rarely true in the real world, where good code is tightly linked to good practices within a development team, besides the single individual refactoring the code to patterns.
 
-I will present what I've gathered after around ~5 years of professional software development on several levels. There won't be a specific order to any of the sections and they can all be read independently of one another.
+I will present what I've gathered after around ~5 years of professional software development on several levels. There won't be a specific order to any of the sections and they can all be read independently of one another. This will be focused mostly on the standard Java, Spring Boot, Docker stack. I will try to otherwise keep all of these as generic as possible, to be useful for the widest possible audience.
+
+### Process and company culture 
+
+TODO
+
+### Write maintainable code
+
+TODO add intro
+
+#### Keep classes and methods short
+
+TODO
+
+#### Leverage your tools: using functional programming in Java
+
+TODO
+
+#### Naming is important
+
+TODO
+
+#### Codebase-wide consistency 
+
+TODO
+
+### Testing for modern web apps
+
+TODO
+
+#### Docker
+
+TODO
+
+#### Testcontainers
+
+TODO
+
+#### Meaningful test data
+
+TODO
+
+### Importance of CI/CD
+
+TODO
+
+### Closing remarks
+
+TODO
+
+
 
 ### Markdown
 
