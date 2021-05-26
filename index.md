@@ -2,7 +2,7 @@
 
 There are endless books and blog posts, articles and videos of lots of respected people in the industry telling you all about code quality and what it takes to write good code.
 
-While all of these are extremely useful in its own right, I feel that sometimes it's all too much on the realm of the theoretical, it's all about arbitrarily large projects, customers demanding features that seem to be a perfect fit to illustrate certain design patterns or refactoring apprroaches. 
+While all of these are extremely useful in its own right, I feel that sometimes it's all too much on the realm of the theoretical, it's all about arbitrarily large projects, customers demanding features that seem to be a perfect fit to illustrate certain design patterns or refactoring approaches. 
 
 This is rarely true in the real world, where good code is tightly linked to good practices within a development team, besides the single individual refactoring the code to patterns.
 
