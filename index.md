@@ -1,8 +1,8 @@
-## Welcome to GitHub Pages
+## Writing quality code
 
-You can use the [editor on GitHub](https://github.com/bruno-oliveira/quality-software/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+There are endless books and blog posts, articles and videos of lots of respected people in the industry telling you all about code quality and what it takes to write good code.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+While all of these are extremely useful in its own right, I feel that sometimes it's all too much on the realm of the theoretical, it's all about arbitrarily large projects, customers demanding f
 
 ### Markdown
 
