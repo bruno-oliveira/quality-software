@@ -10,7 +10,7 @@ I will present what I've gathered after around ~5 years of professional software
 
 ### Process and company culture 
 
-TODO
+Process and company culture can affect code quality much more than any single individual contributions. 
 
 ### Write maintainable code
 
