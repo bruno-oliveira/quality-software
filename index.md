@@ -10,7 +10,11 @@ I will present what I've gathered after around ~5 years of professional software
 
 ### Process and company culture 
 
-Process and company culture can affect code quality much more than any single individual contributions. 
+Process and company culture can affect code quality much more than any single individual contributions. There is a law, called Conway's law, that states that organizations design systems and structure their code in a way that mirrors their own organizational structure, so, this immediately implies that the culture and company that you work for, will affect the way technical problems are handled by you, as an active part of such culture.
+
+It can be very hard to change such a culture from the inside-out, and, sometimes, it may even be impossible, so, it's important to be aware that there is only so much you can do as an individual.
+
+A good way to approach this is to tap on your previous experiences and knowledge, and, trying to leverage it near where there are higher chances it will be listened to and acted upon: near senior developers who can be naturally more in touch with managers, so, your own ideas can ripple up in the organizational structure by first being "seeded" near where they can have the most impact: people who write code and are very aware of current limitations, but, at the same time, can exert some pressure near management. This is typically senior developers who know the company business well, have spent countless hours on the codebase, and, can have influence over management to slightly tip the scales towards better approaches.
 
 ### Write maintainable code
 
