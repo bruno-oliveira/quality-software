@@ -18,11 +18,52 @@ A good way to approach this is to tap on your previous experiences and knowledge
 
 ### Write maintainable code
 
-TODO add intro
+There are many ways to write maintainable code, and, while each codebase is a different beast, there are some general underlying principles that can help you write better code. Let's see some of them.
 
 #### Keep classes and methods short
 
-TODO
+Classes and methods need to be kept short. What this means in practice, is, classes should have a single responsibility, and their behavior should serve one single purpose.
+
+Methods should be kept as short as possible while not hurting readibility or code flow. A good rule of thumb, actually highlighted by IntelliJ IDEA, is that, if a method is longer than 15 lines, it can or should be considered a candidate for a split. Exceptions to the rule apply, of course. Let's see some examples:
+
+```java
+@Service
+public class InvoiceManagementService {
+    private final ClientInfoRepository clientInfoRepository;
+    private final InvoiceRepository invoiceRepository;
+
+   public InvoiceManagementService(ClientInfoRepository clientInfoRepository, InvoiceRepository invoiceRepository){
+      this.clientInfoRepository = clientInfoRepository;
+      this.invoiceRepository = invoiceRepository;
+  }
+
+  public List<ClientInvoice> processAllClientInfoForInvoices(ClientInfoRepository clientInfoRepository){
+      List<ClientData> clientData = clientInfoRepository.retrieveClientDataFromDatabase();
+
+      List<ClientDetails> details = new ArrayList<>();
+      for(ClientData individualClientData: clientData) {
+         details.add(individualClientData.getDetails());
+      }
+
+      List<Long> accountNumbers = new ArrayList<>();
+      for(ClientDetails cd: details) {
+         Long an = cd.getClientAccountNumber();
+         accountNumbers.add(an);
+      }
+
+      List<ClientInvoice> invoices = new ArrayList<>();
+      for(Long accNumber: accountNumbers) {
+        Optional<ClientInvoice> invoice = invoiceRepository.findInvoiceByAccountNumber(accNumber);
+        if(invoice.isPresent()){
+          invoices.add(invoice.get());
+        }
+      }
+
+      return invoices;
+}
+```
+
+
 
 #### Leverage your tools: using functional programming in Java
 
