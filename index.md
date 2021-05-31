@@ -265,7 +265,23 @@ Your colleagues will thank you, and, so will your future self, when you have to 
 
 #### Codebase-wide consistency 
 
-TODO
+Codebase-wide consistency is a very small aspect that is largely covered by leveraging modern frameworks for your tech stack and/or area of domain: using frameworks like Flask (Python), Yesod or IHP (for Haskell) and of course Springboot for Java/Kotlin, largely ends up defining the main building blocks of how your apps will be structured.
+
+These building blocks, however, are only a base, a scaffold, if you will, and, on top of that scaffold, concerns like: what frameworks to use to support testing, how to integrate the code with pipelines, and more importantly, how to USE the framework itself within your company, still need to be addressed and these are the things which will end up defining your application code and how you structure it.
+
+Not all "Java shops" use Spring, and, of those that do use it, each of them will have a different, opinionated way of leveraging the stack to better adjust it to company culture or needs. Be on the look out for this, and, as soon as possible, if you aren't yet doing it, immediately propose to codify your own "stack flavour" into code, i.e. use any available library (or roll your own, really, it is worth it and invaluable!!) to ENFORCE ARCHITECTURAL GUIDELINES IN CODE. What does this mean?
+
+Well, let's see:
+
+- You can't directly inject repository methods inside resource classes, because you think they rightfully should be inside services? Make it an architectural test.
+
+- All services need to be placed into a `service` package? Make it an architectural test.
+
+- Native queries are only allowed on classes that your company annotates with a custom Spring annotation called `@NativeUsed`? Make it an architectural test.
+
+- ...
+
+You get the idea, right? [ArchUnit](https://www.archunit.org/) is a Java specific tool that allows you to "unit test your architecture". An absolutely amazing tool for enforcing code consistency, "codifying" best practices and also great as "live documentation" for onboarding new developers. I cannot recommend this enough!
 
 ### Testing for modern web apps
 
