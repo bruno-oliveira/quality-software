@@ -110,7 +110,55 @@ The two important takeaways from this example are:
       }
 ```
 
-Note that this is already offering us a great opportunity for refactoring. Since these sub-units all seem to have their own
+Note that this is already offering us a great opportunity for refactoring. Since these sub-units all seem to have their own individual responsibilities, we now can look at what makes sense to extract as isolated units into separate, single-purpose methods, to make the code more readable. If we choose to extract the processing of the client details together with the retrieval of the account numbers, as a separate method (note that it makes sense to extract this as a single sub-unit since the methods are closely related) we end up with the following original method:
+
+```java
+public List<ClientInvoice> processAllClientInfoForInvoices(ClientInfoRepository clientInfoRepository){
+      List<ClientData> clientData = clientInfoRepository.retrieveClientDataFromDatabase();
+      
+     extractAccountNumbersFromClientData(clientData);
+
+      List<ClientInvoice> invoices = new ArrayList<>();
+      for(Long accNumber: accountNumbers) {
+        Optional<ClientInvoice> invoice = invoiceRepository.findInvoiceByAccountNumber(accNumber);
+        if(invoice.isPresent()){
+          invoices.add(invoice.get());
+        }
+      }
+
+      return invoices;
+}
+
+public List<AccountNumber> extractAccountNumbersFromClientData(List<ClientData> clientData){
+ List<ClientDetails> details = new ArrayList<>();
+      for(ClientData individualClientData: clientData) {
+         var clientDetails = individualClientData.getDetails();
+         // Long processing logic over the details....
+         details.add(clientDetails);
+      }
+
+      List<Long> accountNumbers = new ArrayList<>();
+      for(ClientDetails cd: details) {
+         Long an = cd.getClientAccountNumber();
+         accountNumbers.add(an);
+      }
+
+    return accountNumbers;
+}
+
+```
+
+Note how now we have managed to isolate the behavior of the account number extraction into a separate method, that is much more "narrow" in its responsibilities: it simply extracts the account numbers from the client details while at the same time serving the purpose of reducing the total method length that spanned the `processAllClientInfoForInvoices` method.
+
+Added benefits include:
+
+* The responsibilities of the original method are now reduced, and, the overall size and amount of code that is necessary to be read to understand the original method is simplified;
+
+* With better isolation in terms of responsibilities, we can more easily debug the code when any problems arise, since we have "laser focus" onto what needs to be looked at;
+
+2. When a class seems to be pulling in many different responsibilities, extract parts of the original code into separate, collaborating services
+
+The refactoring we did before, helped improving the readibility of that particular method....
 
 #### Leverage your tools: using functional programming in Java
 
@@ -173,10 +221,6 @@ Syntax highlighted code block
 ```
 
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/bruno-oliveira/quality-software/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
 ### Support or Contact
 
