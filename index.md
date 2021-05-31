@@ -37,7 +37,7 @@ public class InvoiceManagementService {
       this.invoiceRepository = invoiceRepository;
   }
 
-  public List<ClientInvoice> processAllClientInfoForInvoices(ClientInfoRepository clientInfoRepository){
+  public List<ClientInvoice> processAllClientInfoForInvoices(){
       List<ClientData> clientData = clientInfoRepository.retrieveClientDataFromDatabase();
       
       List<ClientDetails> details = new ArrayList<>();
@@ -113,7 +113,7 @@ The two important takeaways from this example are:
 Note that this is already offering us a great opportunity for refactoring. Since these sub-units all seem to have their own individual responsibilities, we now can look at what makes sense to extract as isolated units into separate, single-purpose methods, to make the code more readable. If we choose to extract the processing of the client details together with the retrieval of the account numbers, as a separate method (note that it makes sense to extract this as a single sub-unit since the methods are closely related) we end up with the following original method:
 
 ```java
-public List<ClientInvoice> processAllClientInfoForInvoices(ClientInfoRepository clientInfoRepository){
+public List<ClientInvoice> processAllClientInfoForInvoices(){
       List<ClientData> clientData = clientInfoRepository.retrieveClientDataFromDatabase();
       
      extractAccountNumbersFromClientData(clientData);
@@ -158,7 +158,41 @@ Added benefits include:
 
 2. When a class seems to be pulling in many different responsibilities, extract parts of the original code into separate, collaborating services
 
-The refactoring we did before, helped improving the readibility of that particular method....
+The refactoring we did before, helped improving the readibility of that particular method, but, sometimes, it is useful to try and extend these foundational refactoring ideas to the class level: "Is this the right place to add this dependency or this method? Does it make sense?". When doing this, we are forced to look more at our class and package structure for our services and confront exactly if what we are doing at one place can be generalized or placed in a different place.
+
+For this simple example, we can look at it from a business perspective: if we have a service that is handling invoice management, does it make sense to couple it with business logic responsible for handling client information? Maybe if it's the only case, it's fine, but, let's assume for a second that retrieving extra data from the client information is a central workflow within the business, with many more applications besides just using the data concerning invoice management.
+
+In that scenario, it makes sense to use composition to create a new service, dedicated to the retrieval of client data, and, this service can then be injected into the other collaborating services that would need this information. This would turn our original class into something like:
+
+```java
+@Service
+public class InvoiceManagementService {
+    private final ClientInformationRetrievingService clientInfoService;
+    private final InvoiceRepository invoiceRepository;
+
+   public InvoiceManagementService(ClientInformationRetrievingService clientInfoService, InvoiceRepository invoiceRepository){
+      this.clientInfoService = clientInfoService;
+      this.invoiceRepository = invoiceRepository;
+  }
+
+  public List<ClientInvoice> processAllClientInfoForInvoices(){
+     List<Long> accountNumbers = clientInfoService.retrieveClientAccountNumbers();
+     List<ClientInvoice> invoices = new ArrayList<>();
+     for(Long accNumber: accountNumbers) {
+       Optional<ClientInvoice> invoice = invoiceRepository.findInvoiceByAccountNumber(accNumber);
+       if(invoice.isPresent()){
+         invoices.add(invoice.get());
+       }
+     }
+     return invoices;
+}
+```
+
+Note how all the logic concerning the client data is completely abstracted away into a separate service.
+
+Now, the code itself is better encapsulated and we have communication between services where each service has its own "domain actors", both the client and the invoices, and each service handles each entity separately, which makes it easier to test, easier to compose and easier even to reuse the newly extracted service into contexts that may not yet even exist (for example, requiring client info when interacting with new target platforms that haven't been yet developed, like mobile apps, or pages containing some report data, etc, the possibilities are endless, and all of them are enabled thanks to this service composition we have just created.
+
+_Aim for composition at every possible level, and leverage your domain entities names and roles to guide you in creating this composition_
 
 #### Leverage your tools: using functional programming in Java
 
