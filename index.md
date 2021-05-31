@@ -285,7 +285,7 @@ You get the idea, right? [ArchUnit](https://www.archunit.org/) is a Java specifi
 
 ### Testing for modern web apps
 
-TODO
+Testing has always been important. I remember being in university and having exam assignments where I needed to write tests alone. It was a daunting, terrible experience, simply because I could never appreciate it enough when I was younger.
 
 #### Docker
 
