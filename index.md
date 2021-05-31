@@ -215,11 +215,53 @@ Streams support a wide range of functional operations that simplify common opera
     Double total = balancesList.stream().filter(entry -> entry.clientIsRegistered()).map(client -> client.retrieveBalance()).summingDouble());
 ```
 
-Simple ifs and loop 
+Simple ifs and loop constructs can be replaced with these type of one-liners, that are both easier to read and write, contribute to adpoting a more modern Java style, and, you should, especially because staying outdated can become a real burden for a company and for yourself as a developer: if everyone is using these features and you are still stuck writing loops, maybe consider updating your own knowledge. Why? Because staying on top of the technologies with which you have to work daily will help you become a better developer and give you chances to introduce improvements in your company's codebase.
+
+2. Optionals are meant to be used as containers that we assume have an object in it, if not, we can just "do nothing"
+
+```java
+    //Dont do this
+    Optional<Invoice> invoice = invoiceRepository.findInvoiceById(1L);
+    
+    if(invoice.isPresent()){
+        Invoice inv = invoice.get();
+        return processInvoice(inv);
+    }
+    else{
+        return Optional.empty();
+    }
+
+    //Do this instead
+    Optional<Invoice> invoice = invoiceRepository.findInvoiceById(1L);
+    
+    return invoice.map(invoice -> processInvoice(invoice));
+```
+
+Read about the new features in your language, and, read about leveraging functional programming constructs specifically, and you will become a better programmer.
+
+These ideas we have just seen of both functional programming idioms as well as composition of services, can actually be combined into a very nice principle for architectural design:
+
+_Imagine your codebase is structured in a layered design, where the DB is one layer, business logics and services is another and external input is yet another: Aim for sanitizing and controlling any external input, push mutable and stateful operations where they belong: the persistence and database layer and maybe dedicated entry points in your business layer, and keep all behavior that is left as immutable as possible: leverage functional composition to build your business services and you will find your code easier to test and maintain._
 
 #### Naming is important
 
-TODO
+Naming is one of the hardest things to do well in programming, for many reasons, but, for me, the killer one is context. While we are in the flow and coding, usually names are almost an afterthought and we just use whatever comes to mind so we don't break our own flow, or, sometimes, well...we simply can't come up with anything truly meaningful for the current context, and it's easy to find lots of generic or incomplete names, like: `getId()`, `computeResult(p)`, etc...
+
+These names only _seem_ helpful while we are working, because we have all the surrounding context in our heads: "ofc it's the invoice order id, or of course the result is the profit of all the clients for the portfolio argument, etc".
+
+Since naming is so important, the best advice I can give here is:
+
+Every time you think in these terms (implying your surrounding code context into your naming style), take a step back and make it **explicit** in the code:
+
+```java
+getId() --> getInvoiceOrderId()
+
+computeResult(p) --> calculateProfitFromAllClientForPortfolio(p)
+
+...
+```
+
+Your colleagues will thank you, and, so will your future self, when you have to revisit your own code for that new killer feature or for the refactoring we all know it's coming at some point down the line. Following the. [Zen of Python](https://www.python.org/dev/peps/pep-0020/): "Explicit is better than implicit."
 
 #### Codebase-wide consistency 
 
@@ -247,9 +289,11 @@ TODO
 
 ### Closing remarks
 
-TODO
+Code quality is important, but, can be hard to get right, and, following these tips has helped me improving myself over time as well as helping others do the same!
 
+If you've managed to read all the way until here: thank you so much, and if you feel like chatting about it or have suggestions, you can always drop me an email at olivbruno8 at gmail dot com, or open a PR, I guess :)
 
+All of these aspects stem from a combination of all my experiences together with the countless blog posts, books and articles I have read and keep reading on a daily basis, these are my own opinions of course, and if you can relate and liked it, then I'm glad! If you feel I should add more to it, let me know! 
 
 ### Markdown
 
