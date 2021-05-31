@@ -110,6 +110,7 @@ The two important takeaways from this example are:
       }
 ```
 
+Note that this is already offering us a great opportunity for refactoring. Since these sub-units all seem to have their own
 
 #### Leverage your tools: using functional programming in Java
 
