@@ -196,7 +196,26 @@ _Aim for composition at every possible level, and leverage your domain entities 
 
 #### Leverage your tools: using functional programming in Java
 
-TODO
+Java has evolved a lot over the course of the last year or year and a half... The core team working on the stack now releases a new major version every 6 months, resulting in Java 17 being already available. With every major release there is a lot of new features being packed, from allowing type inference, to methods in interfaces, to modules, and to a lot of background work on garbage collection and on hiding the JVM internals from the programmers, the Java of today is a very different beast from the Java of simply a year ago.
+
+Java 8 arguably was the biggest release in terms of impact for the developers, thanks to the introduction of functional programming concepts like `streams`, `Optional` and functional interfaces.
+
+Streams support a wide range of functional operations that simplify common operations over lists or spring repositories considerably.
+
+1. Whenever you need to apply a certain operation over each element of a list, be it filtering or transforming or aggregating, streams are the modern way of doing it:
+
+```java
+     //getting even numbers out of a list
+    listOfNumbers.stream().filter(element -> element % 2 == 0).collect(toList());
+
+    //Transforming a list of database entities into business domain entities
+    List<BusinessLogicEntity> transformed = listOfDbEntities.stream().map(dbEntity -> transformEntityToDoBusinessLogic(dbEntity)).collect(toList());
+
+    //Sum all values of balances of clients who have an account registered in your products. Assume `Balance` contains client info about registration 
+    Double total = balancesList.stream().filter(entry -> entry.clientIsRegistered()).map(client -> client.retrieveBalance()).summingDouble());
+```
+
+Simple ifs and loop 
 
 #### Naming is important
 
