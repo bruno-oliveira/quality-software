@@ -285,7 +285,30 @@ You get the idea, right? [ArchUnit](https://www.archunit.org/) is a Java specifi
 
 ### Testing for modern web apps
 
-Testing has always been important. I remember being in university and having exam assignments where I needed to write tests alone. It was a daunting, terrible experience, simply because I could never appreciate it enough when I was younger.
+Testing has always been important. I remember being in university and having exam assignments where I needed to write tests in a standalone fashion by hand on paper, mimicking the junit setup. It was a daunting, terrible experience, simply because I could never appreciate it enough when I was younger, how important tests are for writing good, reliable code. I also never used it at my first two jobs, so, it definitely all takes a long time and effort to sink in.
+However, testing is extremely important in the sense that:
+
+- it serves as documentation of its associated production code, both for new and more seasoned developers. Tests exercise the public methods of the classes they aim to test, so, their public contract is exposed in an isolated, easy to grasp setting;
+
+- ensures code correctness of old and new features, and, when coupled with CI/CD, provides a safe way for new developers to experiment without fear of breaking production;
+
+- Supports automatic docs generation, which is a big plus!
+
+Additionally, not all code can be tested, meaning that for code to be "testable", a certain discipline and code organization is needed. This relates to points discussed above about code consistency and keeping things "short and neat".
+
+Note that testing needs to be done at least at three levels for a typical backend web app:
+
+1. Unit tests: testing method results in isolation. These tests will comprise the bulk of any test suite, for the simple reason that they are self-contained, small, easy to write, and provide valuable feedback when testing complicated methods. For e.g.: when writing a service to check the status of a book requisition in a library, unit tests would be testing concerns like: when no books, an exception will be thrown. A fine will be paid if the date for return is after day X, etc.
+
+2. Integration tests: These tests are the ones doing the heavylifting on most modern apps. They usually rely on a prepared set of test data, and they can interact with databases and simulate calls over the wire using libraries like Spring's `MockMVC` to assert on endpoint responses, checking authorization of endpoints, etc. It's not uncommon to have these tests setting up and tearing down entire application contexts for testing purposes. They test an entire service flow in integration with a set of test data that approaches what would be real world usage.
+
+3. Performance tests: Used as the means to do e2e testing, leveraging API calling tools like Postman, these usually assert response codes and measure response times to catch inneficient implementations in a pipeline on early stages of development.
+
+For modern web apps, usually, Rest APIs using Springboot coupled with a relational database (in the Java world), using Docker for testing has become not only a common practice, but actually, the standard way of writing tests. We will see Docker's place in aiding with application testing at the integration level and we will see why it's so useful.
+
+Final and very important remark about testing:
+
+_If you have taken the time to write and setup tests, you need to make the time to automate them on every commit and run them in a CI/CD pipeline. Testing benefits are only as good as their automation. You need to write them, but, they should run automatically on every commit to offer real value_
 
 #### Docker
 
