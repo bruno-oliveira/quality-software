@@ -312,7 +312,7 @@ _If you have taken the time to write and setup tests, you need to make the time 
 
 #### Docker
 
-TODO
+Docker 
 
 #### Testcontainers
 
@@ -333,31 +333,3 @@ Code quality is important, but, can be hard to get right, and, following these t
 If you've managed to read all the way until here: thank you so much, and if you feel like chatting about it or have suggestions, you can always drop me an email at olivbruno8 at gmail dot com, or open a PR, I guess :)
 
 All of these aspects stem from a combination of all my experiences together with the countless blog posts, books and articles I have read and keep reading on a daily basis, these are my own opinions of course, and if you can relate and liked it, then I'm glad! If you feel I should add more to it, let me know! 
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
