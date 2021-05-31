@@ -39,10 +39,12 @@ public class InvoiceManagementService {
 
   public List<ClientInvoice> processAllClientInfoForInvoices(ClientInfoRepository clientInfoRepository){
       List<ClientData> clientData = clientInfoRepository.retrieveClientDataFromDatabase();
-
+      
       List<ClientDetails> details = new ArrayList<>();
       for(ClientData individualClientData: clientData) {
-         details.add(individualClientData.getDetails());
+         var clientDetails = individualClientData.getDetails();
+         // Long processing logic over the details....
+         details.add(clientDetails);
       }
 
       List<Long> accountNumbers = new ArrayList<>();
@@ -63,6 +65,50 @@ public class InvoiceManagementService {
 }
 ```
 
+We can use this method `processAllClientInfoForInvoices` as an example.
+
+The method is long, and it clearly has many different responsibilities, so, there are a couple of approaches we can take here. Note that this is an intentional example where several things can be improved, but, it's not a toy one, code in production really does look similar.
+
+The two important takeaways from this example are:
+
+1. When a method is too long, split it into logical sub-units:
+
+    Note how we can identify four logical sub-units inside our method:
+
+    1 - Database retrieval
+```java
+      List<ClientData> clientData = clientInfoRepository.retrieveClientDataFromDatabase();
+```
+
+   2 - Processing client details
+```java
+      List<ClientDetails> details = new ArrayList<>();
+      for(ClientData individualClientData: clientData) {
+         var clientDetails = individualClientData.getDetails();
+         // Long processing logic over the details....
+         details.add(clientDetails);
+      }
+```
+
+   3 - Getting account numbers
+```java
+      List<Long> accountNumbers = new ArrayList<>();
+      for(ClientDetails cd: details) {
+         Long an = cd.getClientAccountNumber();
+         accountNumbers.add(an);
+      }
+```
+
+   4 - Retrieving invoices
+```java
+      List<ClientInvoice> invoices = new ArrayList<>();
+      for(Long accNumber: accountNumbers) {
+        Optional<ClientInvoice> invoice = invoiceRepository.findInvoiceByAccountNumber(accNumber);
+        if(invoice.isPresent()){
+          invoices.add(invoice.get());
+        }
+      }
+```
 
 
 #### Leverage your tools: using functional programming in Java
