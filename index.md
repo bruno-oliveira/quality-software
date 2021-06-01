@@ -348,9 +348,25 @@ networks:
       ...
 ```
 
+It is common to maintain several, distinct compose files tailored to specific use cases: for debugging, for testing something with a specific set of test data, for acceptance testing, etc, etc. The main takeaway for Docker in a modern web development context, **in my personal view** is:
+
+_Abstract the dependencies of your code "behind" a docker-compose, make the external dependencies parametrizable - via image names, like branches, or database URLs, and then you have a powerful, idempotent way of testing your code._
+
 #### Testcontainers
 
-TODO
+Linked together with `Docker` and the `docker-compose` scenarios above, we have [Testcontainers](https://www.testcontainers.org/). 
+
+Testcontainers is a Java library that supports JUnit tests, providing lightweight, throwaway instances of common databases, Selenium web browsers, or anything else that can run in a Docker container.
+
+Testcontainers make the following kinds of tests easier:
+
+- Data access layer integration tests: use a containerized instance of a MySQL, PostgreSQL or Oracle database to test your data access layer code for complete compatibility, but without requiring complex setup on developers' machines and safe in the knowledge that your tests will always start with a known DB state. Any other database type that can be containerized can also be used.
+
+- Application integration tests: for running your application in a short-lived test mode with dependencies, such as databases, message queues or web servers.
+
+- UI/Acceptance tests: use containerized web browsers, compatible with Selenium, for conducting automated UI tests. Each test can get a fresh instance of the browser, with no browser state, plugin variations or automated browser upgrades to worry about. And you get a video recording of each test session, or just each session where tests failed.
+
+- much more.... 
 
 #### Meaningful test data
 
