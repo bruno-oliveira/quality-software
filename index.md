@@ -316,6 +316,38 @@ Docker is a set of platform as a service (PaaS) products that use OS-level virtu
 
 The main advantage of Docker is that it removes configuration and local setup pains away from developers, because all the necessary dependencies are bundled as custom images that, once started, will be available as a container, i.e. _a container is a running instance of an image, and, that image can be any pre-baked one available from public registries, or, more importantly, it can be our own code packaged as an image, usually on private container registries managed by your company._
 
+Using `docker-compose`, one can define a configuration of containers that will be started together, and, dependencies between containers can be added to ensure they start up in the correct order, and, like this, a full test environment can be spun up via `docker-compose up --build` and torn down with `docker-compose down`.
+
+An example of a compose file could be:
+
+```yaml
+version: '3'
+
+services:
+  authenticationMock:
+    image: <some_private_company_registry>.com/authenticationAPI/authenticationMock:latest
+    ports:
+      - 7575:7575
+
+  main-app-api:
+    build: .
+    depends_on:
+      - authenticationMock
+    ports:
+      - 8080:8080
+    entrypoint: '/bin/bash /lab/MainAPI.jar'
+    environment:
+      spring_datasource_url: ...
+      some_db_user: ...
+      some_db_user_pass: ....
+
+networks:
+  default:
+    ipam:
+      driver: default
+      ...
+```
+
 #### Testcontainers
 
 TODO
