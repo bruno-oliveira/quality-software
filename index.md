@@ -312,7 +312,9 @@ _If you have taken the time to write and setup tests, you need to make the time 
 
 #### Docker
 
-Docker 
+Docker is a set of platform as a service (PaaS) products that use OS-level virtualization to deliver software in packages called containers. Containers are isolated from one another and bundle their own software, libraries and configuration files together.
+
+The main advantage of Docker is that it removes configuration and local setup pains away from developers, because all the necessary dependencies are bundled as custom images that, once started, will be available as a container, i.e. _a container is a running instance of an image, and, that image can be any pre-baked one available from public registries, or, more importantly, it can be our own code packaged as an image, usually on private container registries managed by your company._
 
 #### Testcontainers
 
