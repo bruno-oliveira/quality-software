@@ -368,9 +368,18 @@ Testcontainers make the following kinds of tests easier:
 
 - much more.... 
 
+In essence, using the annotation `@Testcontainer` on a declared container will inject the container into the test context, and we can then use it in our tests. Great use cases are as mentioned before:
+
+- test data containers
+- databases seeded with special data
+- containers with collaborating services to our code under the integration test
+- external services: e.g. gitlab, postman, etc.
+
 #### Meaningful test data
 
-TODO
+Having meaningful test data plays an important role in being enabled to write useful integration tests and as a consequence to be sure that the code that we are writing is doing what we expect.
+
+As mentioned before, using SQL mount scripts in docker containers, ....
 
 ### Importance of CI/CD
 
