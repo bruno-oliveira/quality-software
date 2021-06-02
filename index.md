@@ -379,7 +379,13 @@ In essence, using the annotation `@Testcontainer` on a declared container will i
 
 Having meaningful test data plays an important role in being enabled to write useful integration tests and as a consequence to be sure that the code that we are writing is doing what we expect.
 
-As mentioned before, using SQL mount scripts in docker containers, ....
+As mentioned before, using SQL mount scripts in docker containers, or running specific "after-migration" scripts to populate the DB with data specific within a certain test context is very important and useful to ensure that the tests are as meaningful as possible.
+
+Ideally, meaningful test data would comprise a subset of your production data, anonimized if necessary or required to comply with certain customer regulations.
+
+If that is not possible, try to generate data in a way that matches your DB schema using any tools available to you.
+
+For cases testing a specific scenario, especially things involving timestamps, removals, revoking/granting certain accesses "on-the-fly", using docker really gives you an edge, as you can add data to the DB that is running on your docker testcontainer and write a specific test that execises the production code against a specific test data set, hand-crafted for those nasty corner cases. It's really a huge benefit.
 
 ### Importance of CI/CD
 
