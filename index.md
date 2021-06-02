@@ -389,7 +389,7 @@ For cases testing a specific scenario, especially things involving timestamps, r
 
 ### Importance of CI/CD
 
-TODO
+Having a CI/CD pipeline in place is extremely important to ensure the quality of the software being deployed to production, and, one of the main reasons why it's so important is that, by automating all the tests to be ran automatically on every commit, we immediately gain some 
 
 ### Closing remarks
 
