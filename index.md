@@ -4,7 +4,11 @@
 2. [Process and company culture](#process-and-company-culture)
 3. [Write maintainable code](#write-maintainable-code)
 4. [Leverage your tools](#leverage-your-tools-using-functional-programming-in-java)
-5. 
+5. [Naming is important](#naming-is-important)
+6. [Codebase-winde consistency](#codebase-wide-consistency)
+7. [Testing](#testing-for-modern-web-apps)
+8. [Importance of CI/CD](#importance-of-cicd)
+9. [Closing remarks](#closing-remarks)
 
 
 ## Writing quality code
