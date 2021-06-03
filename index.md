@@ -1,3 +1,12 @@
+## Contents
+
+1. [Writing quality code](#writing-quality-code)
+2. [Process and company culture](#process-and-company-culture)
+3. [Write maintainable code](#write-maintainable-code)
+4. [Leverage your tools](#leverage-your-tools-using-functional-programming-in-java)
+5. 
+
+
 ## Writing quality code
 
 There are endless books and blog posts, articles and videos of lots of respected people in the industry telling you all about code quality and what it takes to write good code.
