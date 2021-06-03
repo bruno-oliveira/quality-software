@@ -389,7 +389,12 @@ For cases testing a specific scenario, especially things involving timestamps, r
 
 ### Importance of CI/CD
 
-Having a CI/CD pipeline in place is extremely important to ensure the quality of the software being deployed to production, and, one of the main reasons why it's so important is that, by automating all the tests to be ran automatically on every commit, we immediately gain some 
+Having a CI/CD pipeline in place is extremely important to ensure the quality of the software being deployed to production, and, one of the main reasons why it's so important is that, by automating all the tests to be ran automatically on every commit, we immediately gain some confidence and velocity, in the sense that we can be sure that new code that is being written will only be cleared for a peer review after the pipeline is green, indicating that the existing code meets a baseline for quality. 
+It also ensures that new developers who are onboarded on a team will adopt the existing codebase style and will be motivated to do their best work and be part of adding new tests and ensuring that code keeps complying with the quality standards that the pipeline imposes.
+
+In order to setup a pipeline, we can have for example, a special yml file at the root of our project, e.g. `.gitlab-ci.yml` or github actions, or, we can leverage cloud solutions, that enable pipelines to run on the cloud (e.g. Codefresh).
+
+No matter what you choose, having a pipeline setup will make your developer's life easier and will help your project by ensuring its stability and health over time.
 
 ### Closing remarks
 
